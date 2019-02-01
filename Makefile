@@ -14,7 +14,6 @@ CUCKOO = src/cuckoo
 # This assumes the build runs under msys/mingw and with VS2017
 CMAKE ?= /c/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe
 CMAKE_BUILD_PATH ?= build
-MSBUILD ?= /c/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/Bin/MSBuild.exe
 
 HDRS=$(CUCKOO)/cuckoo.h $(CUCKOO)/../crypto/siphash.h
 
@@ -96,4 +95,4 @@ $(CMAKE_BUILD_PATH):
 build_windows: MSBUILD_CONF=Debug
 build_windows: ${CMAKE_BUILD_PATH}
 	cd "${CMAKE_BUILD_PATH}" && \
-		"${MSBUILD}" ALL_BUILD.vcxproj -p:Configuration=${MSBUILD_CONF} -p:Platform=x64
+		${CMAKE} --build . --config ${MSBUILD_CONF} --target ALL_BUILD
