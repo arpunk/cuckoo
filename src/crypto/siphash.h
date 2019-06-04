@@ -10,6 +10,8 @@
 #include <libkern/OSByteOrder.h>
 #define htole32(x) OSSwapHostToLittleInt32(x)
 #define htole64(x) OSSwapHostToLittleInt64(x)
+#elif __FreeBSD__
+#include <sys/endian.h>
 #else
 #include <endian.h>    // for htole32/64
 #endif
